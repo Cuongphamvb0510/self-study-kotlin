@@ -7,6 +7,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="unit_converter_title">Unit Converter</string>
+    <string name="unit_converter_hint">Chọn cùng loại đơn vị (dài hoặc khối lượng)</string>
+    <string name="value_hint">Giá trị</string>
+    <string name="from_unit">Từ đơn vị</string>
+    <string name="to_unit">Sang đơn vị</string>
+    <string name="convert">Chuyển đổi</string>
+    <string name="result_placeholder">Kết quả sẽ hiện ở đây</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
