@@ -1,4 +1,4 @@
-package com.example.kotlin_test
+package com.example.studyandroid
 
 import org.junit.Test
 
