@@ -1,4 +1,4 @@
-package com.example.studyandroid
+package com.example.studyandroid.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.studyandroid.databinding.FragmentLessonBinding
-
 
 class LessonFragment : Fragment() {
     private var _binding: FragmentLessonBinding? = null

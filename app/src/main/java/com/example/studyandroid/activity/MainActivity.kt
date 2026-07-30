@@ -1,7 +1,9 @@
-package com.example.studyandroid
+package com.example.studyandroid.activity
 
 import android.os.Bundle
+import com.example.studyandroid.R
 import com.example.studyandroid.databinding.ActivityMainBinding
+import com.example.studyandroid.fragment.HomeFragment
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding

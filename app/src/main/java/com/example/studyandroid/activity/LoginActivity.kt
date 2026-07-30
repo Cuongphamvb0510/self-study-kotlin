@@ -1,4 +1,4 @@
-package com.example.studyandroid
+package com.example.studyandroid.activity
 
 import android.content.Intent
 import android.graphics.drawable.PictureDrawable
@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import com.caverock.androidsvg.SVG
 import com.example.studyandroid.databinding.ActivityLoginBinding
-
 
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -69,35 +68,39 @@ class LoginActivity : BaseActivity() {
             val phone = edtPhoneNumber.text.toString().trim()
             val password = edtPassword.text.toString().trim()
 
-            if (phone.isEmpty()) {
-                edtPhoneNumber.error = "Vui lòng nhập mật khẩu"
-                edtPhoneNumber.requestFocus()
-                isValid = false
-//                btnLogin.isEnabled = false
-            }
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
 
-            if (password.isEmpty()) {
-                edtPassword.error = "Vui lòng nhập mật khẩu"
-                edtPassword.requestFocus()
-                isValid = false
-//                btnLogin.isEnabled = false
-            }
+//            if (phone.isEmpty()) {
+//                edtPhoneNumber.error = "Vui lòng nhập mật khẩu"
+//                edtPhoneNumber.requestFocus()
+//                isValid = false
+////                btnLogin.isEnabled = false
+//            }
+//
+//            if (password.isEmpty()) {
+//                edtPassword.error = "Vui lòng nhập mật khẩu"
+//                edtPassword.requestFocus()
+//                isValid = false
+////                btnLogin.isEnabled = false
+//            }
 
-            if (isValid) {
-                if (phone == "0347881708" && password == "aaaa1234") {
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-
-                } else {
-                    val messageView = MessageView()
-                    messageView.showError(
-                        binding.root,
-                        "Sai tài khoản hoặc mật khẩu"
-                    )
-                }
-
-            }
+//            if (isValid) {
+//                if (phone == "0347881708" && password == "aaaa1234") {
+//                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+//
+//                } else {
+//                    val messageView = MessageView()
+//                    messageView.showError(
+//                        binding.root,
+//                        "Sai tài khoản hoặc mật khẩu"
+//                    )
+//                }
+//
+//            }
             // Đóng LoginActivity để không quay lại khi nhấn Back
         }
     }

@@ -1,4 +1,4 @@
-package com.example.studyandroid
+package com.example.studyandroid.activity
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.studyandroid.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
