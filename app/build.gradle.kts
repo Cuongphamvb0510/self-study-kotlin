@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation("com.caverock:androidsvg:1.4")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

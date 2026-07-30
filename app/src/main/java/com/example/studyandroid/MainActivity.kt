@@ -15,7 +15,7 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(
-                    R.id.fragmentContainer, // vị trí cần đặng fragment Nó tương ứng với: android:id="@+id/lessonFragmentContainer"
+                    R.id.fragmentContainer,
                     HomeFragment()
                 ).commit()
         }
