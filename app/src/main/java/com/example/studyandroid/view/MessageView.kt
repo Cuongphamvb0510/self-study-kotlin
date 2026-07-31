@@ -1,44 +1,73 @@
 package com.example.studyandroid.view
 
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.widget.Toast
 import com.example.studyandroid.databinding.LayoutMessageBinding
 
-class MessageView {
+enum class MessageType {
+    SUCCESS, ERROR, WARNING
+}
 
-    fun showError(parent: ViewGroup, message: String) {
+object MessageView {
 
-        val binding = LayoutMessageBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+    fun showSuccess(
+        context: Context,
+        message: String,
+        durationMs: Long = 5000L
+    ) {
+        show(context, message, MessageType.SUCCESS, durationMs)
+    }
+
+    fun showError(
+        context: Context,
+        message: String,
+        durationMs: Long = 5000L
+    ) {
+        show(context, message, MessageType.ERROR, durationMs)
+    }
+
+    fun showWarning(
+        context: Context,
+        message: String,
+        durationMs: Long = 5000L
+    ) {
+        show(context, message, MessageType.WARNING, durationMs)
+    }
+
+    private fun show(context: Context, message: String, type: MessageType, durationMs: Long) {
+        val binding = LayoutMessageBinding.inflate(LayoutInflater.from(context))
+
+        when (type) {
+            MessageType.SUCCESS -> {
+                binding.root.setBackgroundColor(0xFF4CAF50.toInt())
+                binding.imgIcon.setImageResource(android.R.drawable.ic_dialog_info)
+            }
+
+            MessageType.ERROR -> {
+                binding.root.setBackgroundColor(0xFFF44336.toInt())
+                binding.imgIcon.setImageResource(android.R.drawable.ic_dialog_alert)
+            }
+
+            MessageType.WARNING -> {
+                binding.root.setBackgroundColor(0xFFFF9800.toInt())
+                binding.imgIcon.setImageResource(android.R.drawable.ic_dialog_alert)
+            }
+        }
 
         binding.txtMessage.text = message
 
-        parent.addView(binding.root)
-
-        binding.root.translationY = -300f
-        binding.root.alpha = 0f
-
-        binding.root.animate()
-            .translationY(0f)
-            .alpha(1f)
-            .setDuration(300)
-            .start()
-
+        val toast = Toast(context.applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        @Suppress("DEPRECATION")
+        toast.view = binding.root
+        toast.setGravity(Gravity.TOP or Gravity.FILL_HORIZONTAL, 0, 100)
+        toast.show()
         Handler(Looper.getMainLooper()).postDelayed({
-
-            binding.root.animate()
-                .translationY(-300f)
-                .alpha(0f)
-                .setDuration(300)
-                .withEndAction {
-                    parent.removeView(binding.root)
-                }
-
-        }, 2000)
+            toast.cancel()
+        }, durationMs)
     }
 }

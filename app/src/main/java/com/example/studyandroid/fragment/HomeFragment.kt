@@ -1,6 +1,5 @@
 package com.example.studyandroid.fragment
 
-import CourseRepository
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.studyandroid.R
+import com.example.studyandroid.activity.AddCourseActivity
 import com.example.studyandroid.activity.CourseDetailActivity
 import com.example.studyandroid.adapter.CourseAdapter
 import com.example.studyandroid.databinding.FragmentHomeBinding
 import com.example.studyandroid.listener.OnCourseClickListener
 import com.example.studyandroid.model.Course
+import com.example.studyandroid.repository.CourseRepository
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(), OnCourseClickListener {
         get() = _binding!!
 
     private val courseList = CourseRepository.courseList
+    private var courseAdapter: CourseAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +40,17 @@ class HomeFragment : Fragment(), OnCourseClickListener {
             container,
             false
         )
+
+        binding.btnAddCourse.setOnClickListener {
+            val intent = Intent(
+                requireContext(),
+                AddCourseActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+
 
         return binding.root
     }
@@ -184,12 +197,9 @@ class HomeFragment : Fragment(), OnCourseClickListener {
     }
 
     private fun setupRecyclerView() {
-
-        val adapter = CourseAdapter(courseList, this)
-
+        courseAdapter = CourseAdapter(courseList, this)
         binding.rvCourse.layoutManager = GridLayoutManager(requireContext(), 2)
-
-        binding.rvCourse.adapter = adapter
+        binding.rvCourse.adapter = courseAdapter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -200,10 +210,14 @@ class HomeFragment : Fragment(), OnCourseClickListener {
         setupRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        courseAdapter?.notifyDataSetChanged()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        courseAdapter = null
         _binding = null
     }
 

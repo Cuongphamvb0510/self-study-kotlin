@@ -1,8 +1,8 @@
 package com.example.studyandroid.activity
 
-import CourseRepository
 import android.os.Bundle
 import com.example.studyandroid.databinding.ActivityCourseDetailBinding
+import com.example.studyandroid.repository.CourseRepository
 
 class CourseDetailActivity : BaseActivity() {
     private lateinit var binding: ActivityCourseDetailBinding

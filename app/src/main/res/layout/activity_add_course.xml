@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên khóa học" />
+
+    <EditText
+        android:id="@+id/edtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edtLesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số bài học"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/edtDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Thời lượng" />
+
+    <EditText
+        android:id="@+id/edtRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rating"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Thêm khóa học" />
+
+</LinearLayout>
