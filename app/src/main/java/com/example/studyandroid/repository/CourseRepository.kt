@@ -18,4 +18,15 @@ object CourseRepository {
     fun nextId(): Int {
         return (courseList.maxOfOrNull { it.id } ?: 0) + 1
     }
+
+    fun updateCourse(course: Course) {
+        val index = courseList.indexOfFirst { it.id == course.id }
+        if (index != -1) {
+            courseList[index] = course
+        }
+    }
+
+    fun deleteCourse(courseId: Int) {
+        courseList.removeAll { it.id == courseId }
+    }
 }

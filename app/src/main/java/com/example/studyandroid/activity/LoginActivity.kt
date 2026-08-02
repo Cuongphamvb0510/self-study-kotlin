@@ -103,5 +103,9 @@ class LoginActivity : BaseActivity() {
 //            }
             // Đóng LoginActivity để không quay lại khi nhấn Back
         }
+
+        binding.btnWeather.setOnClickListener {
+            startActivity(Intent(this, WeatherActivity::class.java))
+        }
     }
 }

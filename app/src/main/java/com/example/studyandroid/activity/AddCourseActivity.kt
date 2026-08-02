@@ -1,5 +1,6 @@
 package com.example.studyandroid.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.studyandroid.R
 import com.example.studyandroid.databinding.ActivityAddCourseBinding
@@ -9,6 +10,18 @@ import com.example.studyandroid.view.MessageView
 
 class AddCourseActivity : BaseActivity() {
     private lateinit var binding: ActivityAddCourseBinding
+    private var editingCourseId: Int = -1
+
+    private fun loadCourse(courseId: Int) {
+        val course = CourseRepository.getCourseById(courseId) ?: return
+
+        binding.edtTitle.setText(course.title)
+        binding.edtPrice.setText(course.price)
+        binding.edtLesson.setText(course.lesson.toString())
+        binding.edtDuration.setText(course.duration)
+        binding.edtRating.setText(course.rating.toString())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddCourseBinding.inflate(layoutInflater)
@@ -17,7 +30,22 @@ class AddCourseActivity : BaseActivity() {
 
         binding.btnAdd.setOnClickListener {
             if (!validateInput()) return@setOnClickListener
-            saveCourse()
+
+
+            if (editingCourseId == -1) {
+                saveCourse()
+            } else {
+                updateCourse()
+            }
+        }
+
+        //edit
+        editingCourseId = intent.getIntExtra("courseId", -1)
+        if (editingCourseId != -1) {
+            loadCourse(editingCourseId)
+            binding.btnAdd.text = "Cập nhật khóa học"
+        } else {
+            binding.btnAdd.text = "Thêm khoá học"
         }
     }
 
@@ -41,6 +69,33 @@ class AddCourseActivity : BaseActivity() {
 
         CourseRepository.addCourse(course)
         MessageView.showSuccess(this, "Thêm khóa học thành công", 10000)
+        finish()
+    }
+
+    private fun updateCourse() {
+        val title = binding.edtTitle.text.toString().trim()
+        val price = binding.edtPrice.text.toString().trim()
+        val lesson = binding.edtLesson.text.toString().trim().toInt()
+        val duration = binding.edtDuration.text.toString().trim()
+        val rating = binding.edtRating.text.toString().trim().toFloatOrNull() ?: 0f
+
+        val old = CourseRepository.getCourseById(editingCourseId) ?: return
+        val course = Course(
+            id = editingCourseId,
+            image = old.image,
+            title = title,
+            price = price,
+            rating = rating,
+            totalReview = 0,
+            lesson = lesson,
+            duration = duration
+        )
+
+        CourseRepository.updateCourse(course)
+        MessageView.showSuccess(this, "Cập nhật thành công")
+        val homeIntent = Intent(this, MainActivity::class.java)
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(homeIntent)
         finish()
     }
 

@@ -59,6 +59,20 @@
             android:layout_marginBottom="24dp"
             android:text="5h 30m" />
 
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Sửa" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Xoá" />
+
     </LinearLayout>
 
 </ScrollView>
