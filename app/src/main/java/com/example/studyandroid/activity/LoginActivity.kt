@@ -107,5 +107,9 @@ class LoginActivity : BaseActivity() {
         binding.btnWeather.setOnClickListener {
             startActivity(Intent(this, WeatherActivity::class.java))
         }
+
+        binding.btnPosts.setOnClickListener {
+            startActivity(Intent(this, PostsActivity::class.java))
+        }
     }
 }
