@@ -8,22 +8,18 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    // 1) Gốc của API — phải kết thúc bằng /
     private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
-    // 2) Log request/response ra Logcat (debug)
     private val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    // 3) OkHttp: tầng gửi HTTP thật
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(logging)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 
-    // 4) Retrofit: gắn baseUrl + OkHttp + parse JSON
     private val jsonPlaceholderRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(okHttpClient) // dùng chung OkHttp + log
@@ -32,3 +28,7 @@ object RetrofitClient {
 
     val postApi: PostApi = jsonPlaceholderRetrofit.create(PostApi::class.java)
 }
+
+//ma hoa giai ma nhu nao
+//        convert res nhu nao
+//        hung data o ui nhu nao

@@ -19,7 +19,7 @@ import com.example.studyandroid.repository.CourseRepository
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class HomeFragment : Fragment(), OnCourseClickListener {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -197,7 +197,13 @@ class HomeFragment : Fragment(), OnCourseClickListener {
     }
 
     private fun setupRecyclerView() {
-        courseAdapter = CourseAdapter(courseList, this)
+        courseAdapter = CourseAdapter(courseList, object : OnCourseClickListener {
+            override fun onCourseClick(course: Course) {
+                val intent = Intent(requireContext(), CourseDetailActivity::class.java)
+                intent.putExtra("courseId", course.id)
+                startActivity(intent)
+            }
+        })
         binding.rvCourse.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCourse.adapter = courseAdapter
     }
@@ -212,7 +218,7 @@ class HomeFragment : Fragment(), OnCourseClickListener {
 
     override fun onResume() {
         super.onResume()
-        courseAdapter?.notifyDataSetChanged()
+//        courseAdapter?.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
@@ -221,11 +227,11 @@ class HomeFragment : Fragment(), OnCourseClickListener {
         _binding = null
     }
 
-    override fun onCourseClick(course: Course) {
-        val intent = Intent(requireContext(), CourseDetailActivity::class.java)
-        intent.putExtra("courseId", course.id)
-        startActivity(intent)
-    }
+//    override fun onCourseClick(course: Course) {
+//        val intent = Intent(requireContext(), CourseDetailActivity::class.java)
+//        intent.putExtra("courseId", course.id)
+//        startActivity(intent)
+//    }
 
 
 }
